@@ -13,12 +13,14 @@ RUN mvn clean install -DskipTests
 # ➡️ Declare the argument that RENDER will set to select the module
 ARG MODULE_NAME
 
+ENV MODULE_PATH_NAME $MODULE_NAME
+
 # Use a minimal JRE image for a small, secure final container
 FROM eclipse-temurin:17-jre-alpine
 
 # The copy path now uses the dynamic MODULE_NAME argument.
 # 🚨 This is the CORRECT path for a multi-module Maven project.
-COPY --from=build /app/$MODULE_NAME/target/$MODULE_NAME*.jar app.jar
+COPY --from=build /app/${MODULE_PATH_NAME}/target/${MODULE_PATH_NAME}*.jar app.jar
 
 ENV PORT 8080
 EXPOSE 8080
