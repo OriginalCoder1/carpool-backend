@@ -18,7 +18,7 @@ FROM eclipse-temurin:17-jre-alpine
 
 # The copy path now uses the dynamic MODULE_NAME argument.
 # 🚨 This is the CORRECT path for a multi-module Maven project.
-COPY --from=build /app/${MODULE_NAME}/target/${MODULE_NAME}-1.0-SNAPSHOT.jar app.jar
+COPY --from=build /app/${MODULE_NAME}/target/${MODULE_NAME}*.jar app.jar
 
 ENV PORT 8080
 EXPOSE 8080
